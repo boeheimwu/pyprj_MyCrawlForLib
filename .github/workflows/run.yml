@@ -1,4 +1,4 @@
-name: run
+name: run MyCrawlForLib
 
 on:
   workflow_dispatch:
@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python Env
+      - name: Step1_Set up Python Env
         uses: actions/setup-python@v5
         with:
           python-version: "3.13"
-      - name: Install dependencies
+      - name: Step2_Install dependencies
         run: python -m pip install requests bs4
-      - name: Run Crawl
+      - name: Step3_Run Crawl
         run: python app01.py
