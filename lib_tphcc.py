@@ -8,7 +8,7 @@ def send_tphcc(bname , bisbn):
     else :
         url_param = "?m=ss&t0=k&k0="+bname+"&c0=and"
     print("[tphcc]", url_param)
-    response = requests.get("https://webpac.tphcc.gov.tw/webpac/search.cfm"+url_param) # 使用get方法
+    response = requests.get("https://webpac.tphcc.gov.tw/webpac/search.cfm"+url_param, verify=False) # 使用get方法
     soup = BeautifulSoup(response.text, "html.parser")
     elm_book_list = soup.find("div", class_="book-list")
     
