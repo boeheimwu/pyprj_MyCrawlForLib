@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import time
+import warnings
 
 def send_ntl(bname , bisbn):
     if bisbn!="" :
@@ -8,6 +9,13 @@ def send_ntl(bname , bisbn):
     else :
         url_param = "?field=ti&match=smart&q="+bname
     print("[ntl]", url_param)
+    #===
+    # [suppress-warnings] 
+    #     https://stackoverflow.com/questions/14463277
+    # warnings.filterwarnings("ignore", message="Unverified HTTPS request is being made to host ")
+    # warnings.filterwarnings("ignore", category=InsecureRequestWarning)
+    warnings.filterwarnings("ignore")
+    
     # 會丟出 ssl certificate , 所以加上 verify=False
     response = requests.get("https://cis2.ntl.edu.tw/webpac/search/"+url_param, verify=False) # 使用get方法
     soup = BeautifulSoup(response.text, "html.parser")

@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import time
+import warnings
 
 def send_tphcc(bname , bisbn):
     if bisbn!="" :
@@ -8,6 +9,8 @@ def send_tphcc(bname , bisbn):
     else :
         url_param = "?m=ss&t0=k&k0="+bname+"&c0=and"
     print("[tphcc]", url_param)
+    warnings.filterwarnings("ignore")
+    
     response = requests.get("https://webpac.tphcc.gov.tw/webpac/search.cfm"+url_param, verify=False) # 使用get方法
     soup = BeautifulSoup(response.text, "html.parser")
     elm_book_list = soup.find("div", class_="book-list")
