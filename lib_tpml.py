@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import time
+import warnings
 
 def send_tpml(bname , bisbn):
     if bisbn!="" :
@@ -8,7 +9,9 @@ def send_tpml(bname , bisbn):
     else :
         url_param = "?searchField=TI&searchInput="+bname
     print("[tpml]", url_param)
-    response = requests.get("https://book.tpml.edu.tw/search"+url_param) # 使用get方法
+    warnings.filterwarnings("ignore")
+    
+    response = requests.get("https://book.tpml.edu.tw/search"+url_param, verify=False) # 使用get方法
     soup = BeautifulSoup(response.text, "html.parser")
     elm_book_list = soup.find("div", class_="rightlineblock")
     
