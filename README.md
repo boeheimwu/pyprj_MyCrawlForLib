@@ -1,7 +1,7 @@
 # 以 書名、ISBN 查找圖書館的館藏
 input檔名 booklist.csv  
 > bg,bname,bisbn,libflag  
-> b4,○○心態,,TX
+> b4,○○心態,,TX  
 > bs,股市心理博弈,9787111306290,TN  
 
 # 使用套件
