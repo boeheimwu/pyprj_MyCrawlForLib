@@ -27,7 +27,7 @@ def get_watch_book(defaultFileName='booklist.csv', p_encoding='utf-8'):
     res = {"b4": b4_arr, "bs": bs_arr}
     '''
     return {
-      "b4":[{"bname":"決斷的演算", "bisbn":"9789869634892"}
+      "b4":[{"bname":"決斷的演算", "bisbn":"9789869634892", "libflag":"TXN"}
             ]
     , "bs":[{"bname":"○○心態""}
     	]
@@ -45,15 +45,20 @@ def convert_json_list_to_dict_list(json_list):
 def my_json_to_dict(i) :
     bname = ""
     bisbn = ""
+    libflag = ""
     if "bname" in i :
         bname = i["bname"]
 
     if "bisbn" in i :
         bisbn = i["bisbn"]
 
+    if "libflag" in i :
+        libflag = i["libflag"]
+
     dict_1 = dict()
     dict_1["bname"] = bname
     dict_1["bisbn"] = bisbn
+    dict_1["libflag"] = libflag.strip() # trim()
     return dict_1
 
 def check_dict_list(dict_list) :
@@ -61,12 +66,17 @@ def check_dict_list(dict_list) :
         #print (d)
         bname = d["bname"]
         bisbn = d["bisbn"]
+        libflag = d["libflag"]
         if(bname=="") :
             print("bname:", bname)  
             return False
 
         if(bisbn!="" and len(bisbn)!=13) :
             print("bisbn:", bisbn, ", len=",len(bisbn),", bname:", bname)  
+            return False
+
+        if(libflag=="" or len(libflag)>3) :
+            print("libflag", libflag)  
             return False
     return True
     
@@ -78,10 +88,25 @@ def main():
             book_list.extend(json_book_list[bg])
     # run
     my_dic_list = convert_json_list_to_dict_list(book_list)
+    my_dic_list_T = []
+    my_dic_list_X = []
+    my_dic_list_N = []
     if check_dict_list(my_dic_list):
-        lib_ntl.lib_ntl_seach_batch(my_dic_list, 7)
-        lib_tphcc.lib_tphcc_seach_batch(book_list, 3)
-        lib_tpml.lib_tpml_seach_batch(book_list, 7)
+        for d in my_dic_list: 
+            d_libflag = d["libflag"]
+            if d_libflag.find("T")>-1 :
+                my_dic_list_T.append(d)
+            if d_libflag.find("X")>-1 :
+                my_dic_list_X.append(d)
+            if d_libflag.find("N")>-1 :
+                my_dic_list_N.append(d)
+        #===
+        if len(my_dic_list_N)>0 :
+            lib_ntl.lib_ntl_seach_batch(my_dic_list_N, 7)
+        if len(my_dic_list_X)>0 :
+            lib_tphcc.lib_tphcc_seach_batch(my_dic_list_X, 3)
+        if len(my_dic_list_T)>0 :
+            lib_tpml.lib_tpml_seach_batch(my_dic_list_T, 7)
 
 # Using the special variable __name__
 if __name__=="__main__":
