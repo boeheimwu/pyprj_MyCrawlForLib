@@ -2,6 +2,7 @@ import lib_ntl
 import lib_tphcc
 import lib_tpml
 import csv
+import sys
 # my Crawl
 def get_watch_book(defaultFileName='booklist.csv', p_encoding='utf-8'):
     b4_arr = []
@@ -81,6 +82,24 @@ def check_dict_list(dict_list) :
     return True
     
 def main():
+    run_T = False
+    run_X = False
+    run_N = False
+    if len(sys.argv)==2:
+        if(sys.argv[1]=="T"):
+            run_T = True
+        elif(sys.argv[1]=="X"):
+            run_X = True
+        elif(sys.argv[1]=="N"):
+            run_N = True
+        else:
+            print("unknown parameter:", sys.argv[1])  
+    elif len(sys.argv)==1:
+        run_T = True
+        run_X = True
+        run_N = True
+
+    # get book from CSV
     json_book_list = get_watch_book()
     book_list = []
     for bg in ["b4", "bs"]:
@@ -101,11 +120,13 @@ def main():
             if d_libflag.find("N")>-1 :
                 my_dic_list_N.append(d)
         #===
-        if len(my_dic_list_N)>0 :
+        if run_N and len(my_dic_list_N)>0 :
             lib_ntl.lib_ntl_seach_batch(my_dic_list_N, 7)
-        if len(my_dic_list_X)>0 :
+
+        if run_X and len(my_dic_list_X)>0 :
             lib_tphcc.lib_tphcc_seach_batch(my_dic_list_X, 3)
-        if len(my_dic_list_T)>0 :
+
+        if run_T and len(my_dic_list_T)>0 :
             lib_tpml.lib_tpml_seach_batch(my_dic_list_T, 7)
 
 # Using the special variable __name__
