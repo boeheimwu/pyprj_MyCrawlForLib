@@ -121,7 +121,7 @@ def main():
             lib_ntl.lib_ntl_seach_batch(my_dic_list_N, 7)
 
         if run_dict['run_X'] and len(my_dic_list_X)>0 :
-            lib_tphcc.lib_tphcc_seach_batch(my_dic_list_X, 3)
+            lib_tphcc.lib_tphcc_seach_batch(my_dic_list_X, 7)
 
         if run_dict['run_T'] and len(my_dic_list_T)>0 :
             lib_tpml.lib_tpml_seach_batch(my_dic_list_T, 7)
