@@ -5,9 +5,9 @@ import warnings
 
 def send_ntl(bname , bisbn):
     if bisbn!="" :
-        url_param = "?field=isn&match=smart&q="+bisbn
+        url_param = "?query_field=issn_isbn&query_op=and&match_type=phrase&query_term="+bisbn
     else :
-        url_param = "?field=ti&match=smart&q="+bname
+        url_param = "?query_field=title&query_op=and&match_type=phrase&query_term="+bname
     print("[ntl]", url_param)
     #===
     # [suppress-warnings] 
@@ -17,12 +17,12 @@ def send_ntl(bname , bisbn):
     warnings.filterwarnings("ignore")
     
     # 會丟出 ssl certificate , 所以加上 verify=False
-    response = requests.get("https://cis2.ntl.edu.tw/webpac/search/"+url_param, verify=False) # 使用get方法
+    response = requests.get("https://cis2.ntl.edu.tw/search/"+url_param, verify=False) # 使用get方法
     soup = BeautifulSoup(response.text, "html.parser")
-    elm_book_list = soup.find("div", class_="listTabs")
-    navBox = elm_book_list.find("ul", class_="uk-nav-side")
+    div_content = soup.find("div", id="content")
+    #print ("div_content=", div_content)
     hasBook = False
-    if len(navBox.find_all('li')) > 0 :
+    if (len(div_content.find_all("div", class_="listMenu")) > 0) :
         hasBook = True
         
     if hasBook :
