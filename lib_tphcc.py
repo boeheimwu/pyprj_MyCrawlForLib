@@ -65,6 +65,7 @@ def to_html(dict_list):
     html_output_file = "output_X.html"
     
     table_rows = ""
+    table_rows_cnt = len(dict_list)
     for d in dict_list: 
         bname = d["bname"]
         bisbn = d["bisbn"]
@@ -83,7 +84,7 @@ def to_html(dict_list):
     <html lang="zh-TW">
     <head>
         <meta charset="UTF-8">
-        <title>output_X</title>
+        <title>tphcc :{table_rows_cnt}</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="helper.js"></script>	
     </head>
@@ -104,7 +105,7 @@ def to_html(dict_list):
     with open(html_output_file, "w", encoding="utf-8") as f:
         f.write(html_content)
     
-    print(f"[target_html is done]: {html_output_file}")
+    print(f"[tphcc]target_html is done: {html_output_file}")
      
 def lib_tphcc_build_html_for_vue(dict_list, sleep_sec):
     param_ok_cnt = 0
