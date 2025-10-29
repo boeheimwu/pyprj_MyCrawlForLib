@@ -117,11 +117,11 @@ def main():
             if d_libflag.find("N")>-1 :
                 my_dic_list_N.append(d)
         #===
-        if run_dict['run_N'] and len(my_dic_list_N)>0 :
-            lib_ntl.lib_ntl_seach_batch(my_dic_list_N, 13)
-
         if run_dict['run_X'] and len(my_dic_list_X)>0 :
             lib_tphcc.lib_tphcc_build_html_for_vue(my_dic_list_X, 13)
+
+        if run_dict['run_N'] and len(my_dic_list_N)>0 :
+            lib_ntl.lib_ntl_seach_batch(my_dic_list_N, 13)
 
         if run_dict['run_T'] and len(my_dic_list_T)>0 :
             lib_tpml.lib_tpml_seach_batch(my_dic_list_T, 13)
