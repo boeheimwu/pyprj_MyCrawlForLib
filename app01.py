@@ -4,7 +4,7 @@ import lib_tpml
 import csv
 import sys
 # my Crawl
-def get_watch_book(defaultFileName='booklist.csv', p_encoding='utf-8'):
+def get_watch_book(defaultFileName, p_encoding='utf-8'):
     b4_arr = []
     bs_arr = []
     """ 註解型式(A)用 "
@@ -83,6 +83,7 @@ def check_dict_list(dict_list) :
     
 def main():
     run_dict = {'run_T': False , 'run_X': False , 'run_N': False} # 用 dictionary
+    run_srcFile = "booklist.csv"
     if len(sys.argv)==2:
         if(sys.argv[1]=="T"):
             run_dict.update({"run_T": True}) 
@@ -90,6 +91,9 @@ def main():
             run_dict.update({"run_X": True}) 
         elif(sys.argv[1]=="N"):
             run_dict.update({"run_N": True}) 
+        elif(sys.argv[1]=="debug"):
+            run_dict.update({'run_T': True , 'run_X': True , 'run_N': True} ) 
+            run_srcFile = "booklist_debug.csv"
         else:
             print("unknown parameter:", sys.argv[1])  
     elif len(sys.argv)==1:
@@ -97,7 +101,7 @@ def main():
         run_dict.update({'run_T': True , 'run_X': True , 'run_N': True} ) 
 
     # get book from CSV
-    json_book_list = get_watch_book()
+    json_book_list = get_watch_book(run_srcFile)
     book_list = []
     for bg in ["b4", "bs"]:
         if len(json_book_list[bg])>0 :
