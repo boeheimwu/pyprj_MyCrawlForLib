@@ -60,9 +60,8 @@ def get_ntpclib_url(bname , bisbn):
     else :
         return site_url + "?m=as&searchsQuerys=fildType=0=books%26keyword=0="+bname+"%26condition=0=and%26&start=1&rows=25&facet=true&lang=zh_TW"
  
-def to_html(dict_list):  
+def to_html(html_output_file, dict_list):  
     folder_path = "./"  
-    html_output_file = "output_X.html"
     
     table_rows = ""
     table_rows_cnt = len(dict_list)
@@ -84,7 +83,7 @@ def to_html(dict_list):
     <html lang="zh-TW">
     <head>
         <meta charset="UTF-8">
-        <title>tphcc :{table_rows_cnt}</title>
+        <title>新北 :{table_rows_cnt}</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="helper.js"></script>	
     </head>
@@ -107,7 +106,7 @@ def to_html(dict_list):
     
     print(f"[tphcc]target_html is done: {html_output_file}")
      
-def lib_tphcc_build_html_for_vue(dict_list, sleep_sec):
+def lib_tphcc_build_html_for_vue(html_build_file, dict_list, sleep_sec):
     param_ok_cnt = 0
     param_fail_cnt = 0
     for d in dict_list: 
@@ -124,7 +123,7 @@ def lib_tphcc_build_html_for_vue(dict_list, sleep_sec):
     
     if(len(dict_list)==param_ok_cnt) :
         # print("tphcc_prepare_build_html")
-        to_html(dict_list)
+        to_html(html_build_file, dict_list)
         print("tphcc_process_cnt:", len(dict_list))
     else:
         print("tphcc_total_cnt:", len(dict_list), "{ok_cnt:", param_ok_cnt, "fail_cnt:", param_fail_cnt, "}")
