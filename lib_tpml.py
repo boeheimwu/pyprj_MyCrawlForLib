@@ -115,7 +115,7 @@ def to_html(html_output_file, dict_list):
     
     print(f"[tpml]target_html is done: {html_output_file}")
      
-def lib_tpml_build_html_for_vue(html_build_file, dict_list, sleep_sec):
+def lib_tpml_build_html_for_vue(html_build_file, dict_list):
     param_ok_cnt = 0
     param_fail_cnt = 0
     for d in dict_list: 
