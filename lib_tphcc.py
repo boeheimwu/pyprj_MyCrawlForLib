@@ -56,7 +56,7 @@ def lib_tphcc_seach_batch(dict_list, sleep_sec):
 def get_ntpclib_url(bname , bisbn):
     site_url = "https://webpac.ntpclib.gov.tw/Miracle_rwd/searchResult"
     if bisbn!="" :
-        return site_url + "?m=ss&keyword="+bisbn+"&start=1&rows=10&facet=true&lang=zh_TW&type=1"
+        return site_url + "?m=as&searchsQuerys=fildType=0=isbn_issn%26keyword=0="+bisbn+"%26condition=0=and%26&start=1&rows=25&facet=true&lang=zh_TW"
     else :
         return site_url + "?m=as&searchsQuerys=fildType=0=books%26keyword=0="+bname+"%26condition=0=and%26&start=1&rows=25&facet=true&lang=zh_TW"
  
