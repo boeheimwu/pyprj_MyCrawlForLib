@@ -92,7 +92,7 @@ def main():
         elif(sys.argv[1]=="N"):
             run_dict.update({"run_N": True}) 
         elif(sys.argv[1]=="debug"):
-            run_dict.update({'run_T': True , 'run_X': True , 'run_N': True} ) 
+            run_dict.update({'run_T': False , 'run_X': False , 'run_N': True} ) 
             run_srcFile = "booklist_debug.csv"
         else:
             print("unknown parameter:", sys.argv[1])  
@@ -128,6 +128,7 @@ def main():
             lib_tphcc.lib_tphcc_build_html_for_vue("build_X.html", my_dic_list_X)
 
         if run_dict['run_N'] and len(my_dic_list_N)>0 :
+            #lib_ntl.lib_ntl_build_html_for_vue("build_N.html", my_dic_list_N)
             lib_ntl.lib_ntl_seach_batch(my_dic_list_N, 13)
 
 # Using the special variable __name__

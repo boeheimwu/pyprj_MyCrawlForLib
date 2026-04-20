@@ -8,4 +8,7 @@ $(document).ready(function(){
 			window.setTimeout(function() {  window.open(libparamurl, "_blank");  }, (_delayTimsMS||1500) * idx);
 		});
 	});
+	$("#gen_identifier").click(function(){
+		window.open($("#identifier_url").text(), "_blank"); 
+	});
 });
